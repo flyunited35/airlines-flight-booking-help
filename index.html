@@ -23,6 +23,12 @@
       color: white;
       padding: 22px 16px;
       text-align: center;
+      position: relative;
+      min-height: 95px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     header h1 {
@@ -34,6 +40,36 @@
       margin: 9px 0 0;
       color: #dce7f7;
       font-size: 14px;
+    }
+
+    .header-call {
+      position: absolute;
+      right: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ffffff;
+      color: #102b50;
+      padding: 12px 18px;
+      border-radius: 9px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .header-call:hover {
+      background: #e8f0fc;
+    }
+
+    .header-call:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
     }
 
     main {
@@ -161,13 +197,33 @@
       padding: 20px;
     }
 
-    @media (max-width: 480px) {
-      .card {
-        padding: 21px 17px;
+    @media (max-width: 700px) {
+      header {
+        padding: 18px 12px;
+        padding-bottom: 20px;
       }
 
       header h1 {
         font-size: 22px;
+        padding: 0 5px;
+      }
+
+      header p {
+        font-size: 13px;
+      }
+
+      .header-call {
+        position: static;
+        transform: none;
+        margin-top: 16px;
+        padding: 11px 16px;
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 21px 17px;
       }
 
       .phone {
@@ -181,6 +237,11 @@
   <header>
     <h1>Flight Booking Assistance</h1>
     <p>Independent assistance for your flight inquiry</p>
+
+    <a class="header-call" href="tel:+18666528170" aria-label="Call 1866-652-8170">
+      <span aria-hidden="true">📞</span>
+      <span>1866-652-8170</span>
+    </a>
   </header>
 
   <main>
@@ -264,11 +325,11 @@
           fare for your trip.
         </p>
 
-        <a class="phone" href="tel:18666528170">
+        <a class="phone" href="tel:+18666528170">
           1866-652-8170
         </a>
 
-        <a class="call-btn" href="tel:18666528170">
+        <a class="call-btn" href="tel:+18666528170">
           Call to Speak with a Live Representative
         </a>
 
