@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Request independent flight booking assistance. Enter your trip details and call our team to check available fares.">
+  <title>Flight Booking Assistance | Get Flight Price</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f6fb;
+      color: #17243a;
+    }
+
+    header {
+      background: #102b50;
+      color: white;
+      padding: 22px 16px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    header p {
+      margin: 9px 0 0;
+      color: #dce7f7;
+      font-size: 14px;
+    }
+
+    main {
+      width: min(100% - 28px, 560px);
+      margin: 35px auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 8px 30px rgba(20, 45, 80, 0.09);
+    }
+
+    .card h2 {
+      text-align: center;
+      margin: 0 0 8px;
+      font-size: 23px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0 0 25px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin: 17px 0 8px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      font-size: 16px;
+      background: white;
+      color: #17243a;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #2563eb;
+      border-color: transparent;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 9px;
+      padding: 16px;
+      margin-top: 25px;
+      background: #1456a0;
+      color: white;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #0e417c;
+    }
+
+    .result {
+      display: none;
+      margin-top: 24px;
+      padding: 24px 18px;
+      border: 1px solid #b8d7c4;
+      border-radius: 12px;
+      background: #f0fbf4;
+      text-align: center;
+    }
+
+    .result h2 {
+      color: #174c2d;
+      margin-bottom: 10px;
+    }
+
+    .result p {
+      line-height: 1.6;
+      color: #355343;
+    }
+
+    .phone {
+      display: block;
+      color: #1456a0;
+      font-size: 30px;
+      font-weight: 800;
+      text-decoration: none;
+      margin: 18px 0;
+    }
+
+    .call-btn {
+      display: block;
+      padding: 15px;
+      border-radius: 9px;
+      background: #168044;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .call-btn:hover {
+      background: #106735;
+    }
+
+    .disclosure {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.5;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      font-size: 12px;
+      padding: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 21px 17px;
+      }
+
+      header h1 {
+        font-size: 22px;
+      }
+
+      .phone {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Flight Booking Assistance</h1>
+    <p>Independent assistance for your flight inquiry</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Find Your Flight</h2>
+      <p class="intro">
+        Enter your trip details to request flight pricing assistance.
+      </p>
+
+      <form id="flightForm">
+        <label for="from">From</label>
+        <input
+          id="from"
+          name="from"
+          type="text"
+          list="airportSuggestions"
+          placeholder="Type departure city or airport"
+          autocomplete="off"
+          required
+        >
+
+        <label for="to">To</label>
+        <input
+          id="to"
+          name="to"
+          type="text"
+          list="airportSuggestions"
+          placeholder="Type destination city or airport"
+          autocomplete="off"
+          required
+        >
+
+        <datalist id="airportSuggestions">
+          <option value="New York (JFK)">
+          <option value="New York (Newark)">
+          <option value="Los Angeles (LAX)">
+          <option value="Chicago (ORD)">
+          <option value="Dallas (DFW)">
+          <option value="Houston (IAH)">
+          <option value="Miami (MIA)">
+          <option value="San Francisco (SFO)">
+          <option value="Washington, DC (IAD)">
+          <option value="Atlanta (ATL)">
+          <option value="Boston (BOS)">
+          <option value="Seattle (SEA)">
+          <option value="Orlando (MCO)">
+          <option value="Las Vegas (LAS)">
+          <option value="Denver (DEN)">
+        </datalist>
+
+        <label for="date">Departure Date</label>
+        <input
+          id="date"
+          name="date"
+          type="date"
+          required
+        >
+
+        <label for="passengers">Passenger Count</label>
+        <select id="passengers" name="passengers" required>
+          <option value="1">1 Passenger</option>
+          <option value="2">2 Passengers</option>
+          <option value="3">3 Passengers</option>
+          <option value="4">4 Passengers</option>
+          <option value="5">5 Passengers</option>
+          <option value="6">6 Passengers</option>
+          <option value="7">7 Passengers</option>
+          <option value="8">8 Passengers</option>
+          <option value="9">9 Passengers</option>
+        </select>
+
+        <button class="submit-btn" type="submit">
+          Get the Price
+        </button>
+      </form>
+
+      <section class="result" id="result" aria-live="polite">
+        <h2>Get Your Flight Price</h2>
+        <p>
+          Call our booking assistance team to check the latest available
+          fare for your trip.
+        </p>
+
+        <a class="phone" href="tel:18666528170">
+          1866-652-8170
+        </a>
+
+        <a class="call-btn" href="tel:18666528170">
+          Call to Speak with a Live Representative
+        </a>
+
+        <p class="disclosure">
+          We provide independent flight booking assistance and are not
+          the official website of any airline.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    Independent flight booking assistance
+  </footer>
+
+  <script>
+    const dateInput = document.getElementById("date");
+    const today = new Date();
+    const localToday = new Date(
+      today.getTime() - today.getTimezoneOffset() * 60000
+    ).toISOString().split("T")[0];
+
+    dateInput.min = localToday;
+
+    document.getElementById("flightForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
+      }
+
+      document.getElementById("result").style.display = "block";
+      document.getElementById("result").scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    });
+  </script>
+</body>
+</html>
