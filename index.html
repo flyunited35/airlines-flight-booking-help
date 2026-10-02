@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="description" content="Request independent flight booking assistance. Enter your trip details and call our team to check available fares.">
-
   <title>Flight Booking Assistance | Get Flight Price</title>
 
   <style>
@@ -62,16 +60,10 @@
       font-weight: 700;
       white-space: nowrap;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-      transition: background 0.2s;
     }
 
     .header-call:hover {
       background: #e8f0fc;
-    }
-
-    .header-call:focus-visible {
-      outline: 3px solid #93c5fd;
-      outline-offset: 3px;
     }
 
     main {
@@ -124,6 +116,55 @@
       border-color: transparent;
     }
 
+    /* Custom airport dropdown */
+    .airport-field {
+      position: relative;
+      width: 100%;
+    }
+
+    .airport-options {
+      display: none;
+      position: absolute;
+      top: calc(100% + 5px);
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+      max-height: 230px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .airport-options.show {
+      display: block;
+    }
+
+    .airport-option {
+      display: block;
+      width: 100%;
+      padding: 13px 14px;
+      border: 0;
+      border-bottom: 1px solid #edf0f5;
+      background: #ffffff;
+      color: #17243a;
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
+    .airport-option:last-child {
+      border-bottom: 0;
+    }
+
+    .airport-option:hover,
+    .airport-option.active {
+      background: #eaf2ff;
+    }
+
     .airport-help {
       font-size: 12px;
       color: #64748b;
@@ -142,7 +183,6 @@
       font-size: 17px;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s;
     }
 
     .submit-btn:hover {
@@ -187,7 +227,6 @@
       text-decoration: none;
       font-weight: 700;
       font-size: 16px;
-      transition: background 0.2s;
     }
 
     .call-btn:hover {
@@ -239,6 +278,10 @@
       .phone {
         font-size: 26px;
       }
+
+      .airport-options {
+        max-height: 200px;
+      }
     }
   </style>
 </head>
@@ -248,12 +291,7 @@
   <header>
     <h1>Flight Booking Assistance</h1>
     <p>Independent assistance for your flight inquiry</p>
-
-    <a
-      class="header-call"
-      href="tel:+18666528170"
-      aria-label="Call 1866-652-8170"
-    >
+    <a class="header-call" href="tel:+18666528170" aria-label="Call 1866-652-8170">
       <span aria-hidden="true">📞</span>
       <span>1866-652-8170</span>
     </a>
@@ -261,7 +299,6 @@
 
   <main>
     <section class="card">
-
       <h2>Find Your Flight</h2>
 
       <p class="intro">
@@ -271,46 +308,43 @@
       <form id="flightForm">
 
         <label for="from">From</label>
-
-        <input
-          id="from"
-          name="from"
-          type="text"
-          list="airportSuggestions"
-          placeholder="Search city, airport or code"
-          autocomplete="off"
-          required
-        >
+        <div class="airport-field">
+          <input
+            id="from"
+            name="from"
+            type="text"
+            placeholder="Search city, airport or code"
+            autocomplete="off"
+            aria-autocomplete="list"
+            aria-expanded="false"
+            required
+          >
+          <div class="airport-options" id="fromOptions"></div>
+        </div>
 
         <p class="airport-help">
           Type at least 2 letters to search airports worldwide.
         </p>
 
         <label for="to">To</label>
-
-        <input
-          id="to"
-          name="to"
-          type="text"
-          list="airportSuggestions"
-          placeholder="Search destination city or airport"
-          autocomplete="off"
-          required
-        >
-
-        <datalist id="airportSuggestions"></datalist>
+        <div class="airport-field">
+          <input
+            id="to"
+            name="to"
+            type="text"
+            placeholder="Search destination city or airport"
+            autocomplete="off"
+            aria-autocomplete="list"
+            aria-expanded="false"
+            required
+          >
+          <div class="airport-options" id="toOptions"></div>
+        </div>
 
         <label for="date">Departure Date</label>
-
-        <input
-          id="date"
-          name="date"
-          type="date"
-          required
-        >
+        <input id="date" name="date" type="date" required>
 
         <label for="passengers">Passenger Count</label>
-
         <select id="passengers" name="passengers" required>
           <option value="1">1 Passenger</option>
           <option value="2">2 Passengers</option>
@@ -323,14 +357,10 @@
           <option value="9">9 Passengers</option>
         </select>
 
-        <button class="submit-btn" type="submit">
-          Get the Price
-        </button>
-
+        <button class="submit-btn" type="submit">Get the Price</button>
       </form>
 
       <section class="result" id="result" aria-live="polite">
-
         <h2>Get Your Flight Price</h2>
 
         <p>
@@ -338,9 +368,7 @@
           fare for your trip.
         </p>
 
-        <a class="phone" href="tel:+18666528170">
-          1866-652-8170
-        </a>
+        <a class="phone" href="tel:+18666528170">1866-652-8170</a>
 
         <a class="call-btn" href="tel:+18666528170">
           📞 Call to Speak with a Live Representative
@@ -350,9 +378,7 @@
           We provide independent flight booking assistance and are not
           the official website of any airline.
         </p>
-
       </section>
-
     </section>
   </main>
 
@@ -362,16 +388,6 @@
 
   <script>
     const dateInput = document.getElementById("date");
-    const airportList = document.getElementById("airportSuggestions");
-
-    const airportInputs = [
-      document.getElementById("from"),
-      document.getElementById("to")
-    ];
-
-    let airports = [];
-
-    // Set minimum departure date to today
     const today = new Date();
 
     const localToday = new Date(
@@ -380,15 +396,148 @@
 
     dateInput.min = localToday;
 
-    // Load worldwide airport data
-    fetch(
-      "https://raw.githubusercontent.com/mwgg/Airports/master/airports.json"
-    )
+    let airports = [];
+
+    const airportFields = [
+      {
+        input: document.getElementById("from"),
+        options: document.getElementById("fromOptions")
+      },
+      {
+        input: document.getElementById("to"),
+        options: document.getElementById("toOptions")
+      }
+    ];
+
+    function closeAllDropdowns(except = null) {
+      airportFields.forEach(field => {
+        if (field !== except) {
+          field.options.classList.remove("show");
+          field.input.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    function showAirportOptions(field) {
+      const query = field.input.value.trim().toLowerCase();
+      const container = field.options;
+
+      container.innerHTML = "";
+
+      if (query.length < 2 || airports.length === 0) {
+        container.classList.remove("show");
+        field.input.setAttribute("aria-expanded", "false");
+        return;
+      }
+
+      const matches = airports
+        .filter(airport =>
+          airport.name.toLowerCase().includes(query) ||
+          airport.city.toLowerCase().includes(query) ||
+          airport.country.toLowerCase().includes(query) ||
+          airport.iata.toLowerCase().includes(query)
+        )
+        .slice(0, 50);
+
+      if (matches.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "airport-option";
+        empty.textContent = "No airports found. Try another search.";
+        container.appendChild(empty);
+      } else {
+        matches.forEach(airport => {
+          const option = document.createElement("button");
+          option.type = "button";
+          option.className = "airport-option";
+
+          const displayName =
+            `${airport.city ? airport.city + " - " : ""}` +
+            `${airport.name} (${airport.iata})`;
+
+          option.textContent = displayName;
+
+          option.addEventListener("click", () => {
+            field.input.value = displayName;
+            container.classList.remove("show");
+            field.input.setAttribute("aria-expanded", "false");
+            field.input.focus();
+          });
+
+          container.appendChild(option);
+        });
+      }
+
+      container.classList.add("show");
+      field.input.setAttribute("aria-expanded", "true");
+    }
+
+    airportFields.forEach(field => {
+      field.input.addEventListener("input", () => {
+        closeAllDropdowns(field);
+        showAirportOptions(field);
+      });
+
+      field.input.addEventListener("focus", () => {
+        closeAllDropdowns(field);
+        showAirportOptions(field);
+      });
+
+      field.input.addEventListener("keydown", event => {
+        const options = Array.from(
+          field.options.querySelectorAll(".airport-option")
+        ).filter(option => option.tagName === "BUTTON");
+
+        if (!field.options.classList.contains("show") || options.length === 0) {
+          return;
+        }
+
+        const currentIndex = options.findIndex(
+          option => option.classList.contains("active")
+        );
+
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          const nextIndex = Math.min(currentIndex + 1, options.length - 1);
+          options.forEach(option => option.classList.remove("active"));
+          options[nextIndex].classList.add("active");
+          options[nextIndex].scrollIntoView({ block: "nearest" });
+        }
+
+        if (event.key === "ArrowUp") {
+          event.preventDefault();
+          const nextIndex = currentIndex <= 0 ? 0 : currentIndex - 1;
+          options.forEach(option => option.classList.remove("active"));
+          options[nextIndex].classList.add("active");
+          options[nextIndex].scrollIntoView({ block: "nearest" });
+        }
+
+        if (event.key === "Enter" && currentIndex >= 0) {
+          event.preventDefault();
+          options[currentIndex].click();
+        }
+
+        if (event.key === "Escape") {
+          field.options.classList.remove("show");
+          field.input.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    document.addEventListener("click", event => {
+      const insideAirportField = airportFields.some(field =>
+        field.input.parentElement.contains(event.target)
+      );
+
+      if (!insideAirportField) {
+        closeAllDropdowns();
+      }
+    });
+
+    fetch("https://raw.githubusercontent.com/mwgg/Airports/master/airports.json")
       .then(response => {
         if (!response.ok) {
           throw new Error("Airport data could not be loaded");
         }
-
         return response.json();
       })
       .then(data => {
@@ -407,65 +556,23 @@
         console.error("Airport loading error:", error);
       });
 
-    // Search airports as the user types
-    airportInputs.forEach(input => {
+    document.getElementById("flightForm").addEventListener("submit", function(event) {
+      event.preventDefault();
 
-      input.addEventListener("input", function() {
-
-        const query = this.value.trim().toLowerCase();
-
-        airportList.innerHTML = "";
-
-        if (query.length < 2 || airports.length === 0) {
-          return;
-        }
-
-        const matches = airports
-          .filter(airport =>
-            airport.name.toLowerCase().includes(query) ||
-            airport.city.toLowerCase().includes(query) ||
-            airport.country.toLowerCase().includes(query) ||
-            airport.iata.toLowerCase().includes(query)
-          )
-          .slice(0, 100);
-
-        matches.forEach(airport => {
-
-          const option = document.createElement("option");
-
-          option.value =
-            `${airport.city ? airport.city + " - " : ""}` +
-            `${airport.name} (${airport.iata})`;
-
-          airportList.appendChild(option);
-
-        });
-
-      });
-
-    });
-
-    // Handle form submission
-    document.getElementById("flightForm").addEventListener(
-      "submit",
-      function(event) {
-
-        event.preventDefault();
-
-        if (!this.checkValidity()) {
-          this.reportValidity();
-          return;
-        }
-
-        document.getElementById("result").style.display = "block";
-
-        document.getElementById("result").scrollIntoView({
-          behavior: "smooth",
-          block: "nearest"
-        });
-
+      if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
       }
-    );
+
+      closeAllDropdowns();
+
+      document.getElementById("result").style.display = "block";
+
+      document.getElementById("result").scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    });
   </script>
 
 </body>
